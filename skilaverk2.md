@@ -1,6 +1,6 @@
-#Skilaverkefni 2
+# Skilaverkefni 2
 
-##Basic Queries
+## Basic Queries
 
 1.
 ```sql
@@ -52,7 +52,7 @@ select Discontinued, count(Discontinued) from products group by Discontinued;
 select ProductName, UnitsOnOrder, UnitsInStock from products where UnitsInStock < UnitsOnOrder order by UnitsInStock asc;
 ```
 
-##Sub-Queries
+## Sub-Queries
 
 1. 
 ```sql
@@ -79,7 +79,7 @@ select first_name, last_name from employees where employee_id in (select manager
 select first_name, last_name from employees where salary > (select avg(salary) from employees);
 ```
 
-##Join
+## Join
 
 1.
 ```sql
