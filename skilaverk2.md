@@ -108,13 +108,20 @@ order by department_id asc;
 select e.employee_id, e.last_name, e.manager_id, m.last_name
 from employees e
 join employees m
-where e.manager_id = m.employee_id
+where e.manager_id = m.employee_id;
 ```
 5.
 ```sql
-
+select e.last_name, e.last_name, e.hire_date
+from employees e
+join employees m
+where e.hire_date > m.hire_date and m.last_name = 'Jones';
 ```
 6.
 ```sql
-
+select department_name, count(*) as 'number of empl'
+from employees
+inner join departments on (employees.department_id = departments.department_id)
+group by department_name
+order by count(*) desc;
 ```
