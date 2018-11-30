@@ -308,13 +308,27 @@ where price_code = 4;
 delimiter //
 create procedure prc_new_rental (m_num int)
 begin
-	select mem_num, (case when (mem_num = m_num)
-    then
-    select 'membership does exist'
-    else
-    select 'membership does not exist'
-    end)
-    as test from membership;
+	declare mem_num_count int; 
+	declare prev_mem_balance decimal(4, 2);
+	select count(*)
+	into mem_num_count
+	from membership
+	where mem_num = m_num;
+	if mem_num_count = 0 then
+
+		select 'membership does exist';
+
+	else
+		select mem_balance
+		into prev_mem_balance
+		from membership
+		where mem_num = m_num;
+		select concat('previous balance: ', prev_mem_balance) as 'previous membership balance';
+		insert into rental (rent_date, mem_num)
+		values 
+		(sysdate(), m_num);
+	end if;
 end//
 
+call prc_new_rental(102);
 ```
