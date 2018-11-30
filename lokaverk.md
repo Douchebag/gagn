@@ -1,6 +1,6 @@
 ```sql
-create database 1611012220_MovieCo;
-use 1611012220_MovieCo;
+create database kt_MovieCo;
+use kt_MovieCo;
 
 ------------- CREATE TABLES --------------
 
