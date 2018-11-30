@@ -236,5 +236,9 @@ inner join price on (movie.price_code = price.price_code)
 where movie_genre like 'family' or movie_genre like 'comedy' or movie_genre like 'drama';
 
 -- 17
+select min(mem_balance) as 'minimum balance', max(mem_balance) as 'maximum balance', avg(mem_balance) as 'average balance'
+from membership;
+
+-- 18
 
 ```
