@@ -1,6 +1,6 @@
 ```sql
-create database kennitala_MovieCo;
-use kennitala_MovieCo;
+create database 1611012220_MovieCo;
+use 1611012220_MovieCo;
 
 ------------- CREATE TABLES --------------
 
@@ -240,5 +240,81 @@ select min(mem_balance) as 'minimum balance', max(mem_balance) as 'maximum balan
 from membership;
 
 -- 18
+select concat(mem_fname, ' ', mem_lname) as 'membership name', concat(mem_street, ' ', mem_city, ' ', mem_state, ' ', mem_zip) as 'membership address'
+from membership;
+
+-- 19
+select rental.rent_num, rental.rent_date, video.vid_num, movie.movie_title as movie_title, detailrental.detail_duedate
+as due_date, detailrental.detail_returndate as return_date
+from rental
+inner join detailrental on (detailrental.rent_num = rental.rent_num)
+inner join video on (video.vid_num = detailrental.vid_num)
+inner join movie on (video.movie_num = movie.movie_num)
+where detailrental.detail_returndate > detailrental.detail_duedate;
+
+
+
+-- 20
+select rental.rent_num, rent_date, detailRental.vid_num, movie.movie_title, detailrental.detail_duedate, detailrental.detail_returndate, datediff(detailrental.detail_returndate, detailrental.detail_duedate) as 'days past due'
+from rental
+inner join detailrental on (detailrental.rent_num = rental.rent_num)
+inner join video on (video.vid_num = detailrental.vid_num)
+inner join movie on (video.movie_num = movie.movie_num)
+order by rental.rent_num, movie.movie_title;
+
+-- 21
+select rental.rent_num as rent_num, rental.rent_date as rent_date,movie.movie_title as movie_title, detailrental.detail_fee as detail_fee
+from rental
+inner join detailrental on (detailrental.rent_num = rental.rent_num)
+inner join video on (video.vid_num = detailrental.vid_num)
+inner join movie on (video.movie_num = movie.movie_num)
+where detailrental.detail_returndate <= detailrental.detail_duedate;
+
+-- 22
+select m.mem_num, m.mem_lname, m.mem_fname, sum(detailrental.detail_fee) 
+from membership m
+inner join rental on (rental.mem_num = m.mem_num)
+inner join detailrental on (detailrental.rent_num = rental.rent_num)
+group by m.mem_num;
+
+-- 23
+select movie_num, movie_genre, avg(movie_cost) as average_cost, movie_cost, ((movie_cost - avg(movie_cost)) / avg(movie_cost) * 100) as percent_difference
+from movie
+group by movie_genre;
+
+-- 24
+alter table detailrental add detail_dayslate int(3);
+
+-- 25
+alter table video add vid_status char(4) not null default 'IN' check (vid_status in ('IN', 'OUT', 'LOST'));
+
+-- 26
+update video 
+set vid_status = 'out'
+where vid_num in (select vid_num from detailrental where detail_returndate is null);
+
+-- 27
+alter table price add column price_rentdays int(2) not null default 3;
+
+-- 28
+update price 
+set price_rentdays = 5
+where price_code in (1, 3);
+update price 
+set price_rentdays = 7
+where price_code = 4;
+
+-- 29
+delimiter //
+create procedure prc_new_rental (m_num int)
+begin
+	select mem_num, (case when (mem_num = m_num)
+    then
+    select 'membership does exist'
+    else
+    select 'membership does not exist'
+    end)
+    as test from membership;
+end//
 
 ```
