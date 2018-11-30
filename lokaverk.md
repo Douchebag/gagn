@@ -230,5 +230,11 @@ from movie
 where movie_cost between 44.99 and 49.99;
 
 -- 16
+select movie_title, movie_year, price.price_description as price_description, price.price_rentfee as price_rentfee, movie_genre
+from movie
+inner join price on (movie.price_code = price.price_code)
+where movie_genre like 'family' or movie_genre like 'comedy' or movie_genre like 'drama';
+
+-- 17
 
 ```
