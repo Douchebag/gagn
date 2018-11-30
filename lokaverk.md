@@ -225,5 +225,10 @@ from movie
 where price_code;
 
 -- 15
+select movie_title, movie_year, movie_cost
+from movie
+where movie_cost between 44.99 and 49.99;
+
+-- 16
 
 ```
