@@ -221,5 +221,9 @@ inner join price on (movie.price_code = price.price_code);
 
 -- 14
 select movie_title, movie_year
+from movie
+where price_code;
+
+-- 15
 
 ```
