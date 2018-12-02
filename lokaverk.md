@@ -278,9 +278,14 @@ inner join detailrental on (detailrental.rent_num = rental.rent_num)
 group by m.mem_num;
 
 -- 23
-select movie_num, movie_genre, avg(movie_cost) as average_cost, movie_cost, ((movie_cost - avg(movie_cost)) / avg(movie_cost) * 100) as percent_difference
-from movie
-group by movie_genre;
+select a.movie_num, a.movie_genre, a.movie_cost, b.avg_cost,
+       (a.movie_cost - b.avg_cost) / b.avg_cost * 100 as percentage_diff
+from movie a
+inner join (
+    select movie_genre, avg(movie_cost) as avg_cost from movie
+    group by movie_genre
+) b
+using (movie_genre);
 
 -- 24
 alter table detailrental add detail_dayslate int(3);
