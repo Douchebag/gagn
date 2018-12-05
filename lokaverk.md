@@ -192,7 +192,7 @@ from movie
 where movie_cost < 50 and movie_genre = 'ACTION' or movie_cost < 50 and movie_genre = 'COMEDY'
 order by movie_genre asc;
 ```
-![](https://github.com/Douchebag/gagn/blob/master/pics/6.PNG)
+![](https://github.com/Douchebag/gagn/blob/master/pics/6a.PNG)
 ```sql
 -- 7
 select movie_num, concat(movie_title, ' (', movie_year, ') ', movie_genre) as "Movie Description"
