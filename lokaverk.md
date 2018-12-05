@@ -160,7 +160,8 @@ values
 (1008, 34369, 3.5, '2009-3-05', '2009-3-05', 3),
 (1009, 54324, 3.5, '2009-3-05', null, 3),
 (1001, 34366, 3.5, '2009-3-04', '2009-3-02', 3);
-
+```
+```sql
 -------------- SELECT STATEMENTS ---------------
 
 -- 3
@@ -168,81 +169,113 @@ select movie_title, movie_year, movie_cost
 from movie
 where movie_title like '%hope%'
 order by movie_title asc;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/3.PNG)
+```sql
 -- 4
 select movie_title, movie_genre, movie_year
 from movie
 where movie_genre like 'ACTION';
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/4.PNG)
+```sql
 -- 5
 select movie_num, movie_title, movie_cost
 from movie
 where movie_cost > 40;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/5.PNG)
+```sql
 -- 6
 select movie_num, movie_title, movie_cost, movie_genre
 from movie
 where movie_cost < 50 and movie_genre = 'ACTION' or movie_cost < 50 and movie_genre = 'COMEDY'
 order by movie_genre asc;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/6.PNG)
+```sql
 -- 7
 select movie_num, concat(movie_title, ' (', movie_year, ') ', movie_genre) as "Movie Description"
 from movie;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/7.PNG)
+```sql
 -- 8
 select movie_genre, count(movie_genre)
 from movie
 group by movie_genre;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/8.PNG)
+```sql
 -- 9
 select avg(movie_cost) as "Avg Movie Price"
 from movie;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/9.PNG)
+```sql
 -- 10
 select round(avg(movie_cost), 2) as "Avg Movie Price", movie_genre
 from movie
 GROUP BY movie_genre;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/10.PNG)
+```sql
 -- 11
 select movie_title, movie_genre, price.price_description as 'description', price.price_rentfee as 'rentfee'
 from movie
 inner join price on (movie.price_code = price.price_code);
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/11.PNG)
+```sql
 -- 12
 select movie_genre, round(avg(price.price_rentfee), 2) as 'avg rentfee'
 from movie
 inner join price on movie.price_code = price.price_code
 group by movie_genre;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/12.PNG)
+```sql
 -- 13
 select movie_title, movie_year, round((movie_cost/price.price_rentfee), 2) as 'Breakeven Rentals'
 from movie
 inner join price on (movie.price_code = price.price_code);
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/13.PNG)
+```sql
 -- 14
 select movie_title, movie_year
 from movie
 where price_code;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/14.PNG)
+```sql
 -- 15
 select movie_title, movie_year, movie_cost
 from movie
 where movie_cost between 44.99 and 49.99;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/15.PNG)
+```sql
 -- 16
 select movie_title, movie_year, price.price_description as price_description, price.price_rentfee as price_rentfee, movie_genre
 from movie
 inner join price on (movie.price_code = price.price_code)
 where movie_genre like 'family' or movie_genre like 'comedy' or movie_genre like 'drama';
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/16.PNG)
+```sql
 -- 17
 select min(mem_balance) as 'minimum balance', max(mem_balance) as 'maximum balance', avg(mem_balance) as 'average balance'
 from membership;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/17.PNG)
+```sql
 -- 18
 select concat(mem_fname, ' ', mem_lname) as 'membership name', concat(mem_street, ' ', mem_city, ' ', mem_state, ' ', mem_zip) as 'membership address'
 from membership;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/18.PNG)
+```sql
 -- 19
 select rental.rent_num, rental.rent_date, video.vid_num, movie.movie_title as movie_title, detailrental.detail_duedate
 as due_date, detailrental.detail_returndate as return_date
@@ -251,9 +284,9 @@ inner join detailrental on (detailrental.rent_num = rental.rent_num)
 inner join video on (video.vid_num = detailrental.vid_num)
 inner join movie on (video.movie_num = movie.movie_num)
 where detailrental.detail_returndate > detailrental.detail_duedate;
-
-
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/19.PNG)
+```sql
 -- 20
 select rental.rent_num, rent_date, detailRental.vid_num, movie.movie_title, detailrental.detail_duedate, detailrental.detail_returndate, datediff(detailrental.detail_returndate, detailrental.detail_duedate) as 'days past due'
 from rental
@@ -261,7 +294,9 @@ inner join detailrental on (detailrental.rent_num = rental.rent_num)
 inner join video on (video.vid_num = detailrental.vid_num)
 inner join movie on (video.movie_num = movie.movie_num)
 order by rental.rent_num, movie.movie_title;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/20.PNG)
+```sql
 -- 21
 select rental.rent_num as rent_num, rental.rent_date as rent_date,movie.movie_title as movie_title, detailrental.detail_fee as detail_fee
 from rental
@@ -269,14 +304,18 @@ inner join detailrental on (detailrental.rent_num = rental.rent_num)
 inner join video on (video.vid_num = detailrental.vid_num)
 inner join movie on (video.movie_num = movie.movie_num)
 where detailrental.detail_returndate <= detailrental.detail_duedate;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/21.PNG)
+```sql
 -- 22
 select m.mem_num, m.mem_lname, m.mem_fname, sum(detailrental.detail_fee) 
 from membership m
 inner join rental on (rental.mem_num = m.mem_num)
 inner join detailrental on (detailrental.rent_num = rental.rent_num)
 group by m.mem_num;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/22.PNG)
+```sql
 -- 23
 select a.movie_num, a.movie_genre, a.movie_cost, b.avg_cost,
        (a.movie_cost - b.avg_cost) / b.avg_cost * 100 as percentage_diff
@@ -286,21 +325,31 @@ inner join (
     group by movie_genre
 ) b
 using (movie_genre);
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/23.PNG)
+```sql
 -- 24
 alter table detailrental add detail_dayslate int(3);
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/24.PNG)
+```sql
 -- 25
 alter table video add vid_status char(4) not null default 'IN' check (vid_status in ('IN', 'OUT', 'LOST'));
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/25.PNG)
+```sql
 -- 26
 update video 
 set vid_status = 'out'
 where vid_num in (select vid_num from detailrental where detail_returndate is null);
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/26.PNG)
+```sql
 -- 27
 alter table price add column price_rentdays int(2) not null default 3;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/27.PNG)
+```sql
 -- 28
 update price 
 set price_rentdays = 5
@@ -308,7 +357,9 @@ where price_code in (1, 3);
 update price 
 set price_rentdays = 7
 where price_code = 4;
-
+```
+![](https://github.com/Douchebag/gagn/blob/master/pics/28.PNG)
+```sql
 -- 29
 delimiter //
 create procedure prc_new_rental (m_num int)
@@ -337,3 +388,4 @@ end//
 
 call prc_new_rental(102);
 ```
+![](https://github.com/Douchebag/gagn/blob/master/pics/29.PNG)
