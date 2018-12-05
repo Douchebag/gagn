@@ -326,29 +326,29 @@ inner join (
 ) b
 using (movie_genre);
 ```
-![](https://github.com/Douchebag/gagn/blob/master/pics/23.PNG)
+![](https://github.com/Douchebag/gagn/blob/master/pics/23.png)
 ```sql
 -- 24
 alter table detailrental add detail_dayslate int(3);
 ```
-![](https://github.com/Douchebag/gagn/blob/master/pics/24.PNG)
+![](https://github.com/Douchebag/gagn/blob/master/pics/24.png)
 ```sql
 -- 25
 alter table video add vid_status char(4) not null default 'IN' check (vid_status in ('IN', 'OUT', 'LOST'));
 ```
-![](https://github.com/Douchebag/gagn/blob/master/pics/25.PNG)
+![](https://github.com/Douchebag/gagn/blob/master/pics/25.png)
 ```sql
 -- 26
 update video 
 set vid_status = 'out'
 where vid_num in (select vid_num from detailrental where detail_returndate is null);
 ```
-![](https://github.com/Douchebag/gagn/blob/master/pics/26.PNG)
+![](https://github.com/Douchebag/gagn/blob/master/pics/26.png)
 ```sql
 -- 27
 alter table price add column price_rentdays int(2) not null default 3;
 ```
-![](https://github.com/Douchebag/gagn/blob/master/pics/27.PNG)
+![](https://github.com/Douchebag/gagn/blob/master/pics/27.png)
 ```sql
 -- 28
 update price 
@@ -358,7 +358,7 @@ update price
 set price_rentdays = 7
 where price_code = 4;
 ```
-![](https://github.com/Douchebag/gagn/blob/master/pics/28.PNG)
+![](https://github.com/Douchebag/gagn/blob/master/pics/28.png)
 ```sql
 -- 29
 delimiter //
@@ -388,4 +388,5 @@ end//
 
 call prc_new_rental(102);
 ```
-![](https://github.com/Douchebag/gagn/blob/master/pics/29.PNG)
+![](https://github.com/Douchebag/gagn/blob/master/pics/29.png)
+![](https://github.com/Douchebag/gagn/blob/master/pics/29.png)
