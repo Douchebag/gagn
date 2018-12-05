@@ -389,4 +389,3 @@ end//
 call prc_new_rental(102);
 ```
 ![](https://github.com/Douchebag/gagn/blob/master/pics/29.png)
-![](https://github.com/Douchebag/gagn/blob/master/pics/292.png)
